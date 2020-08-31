@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "sass scss/style.scss css/style.css"
+    "scss": "sass assets/scss/app.scss assets/css/app.css",
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +16,9 @@
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.30.2",
+    "webpack-notifier": "^1.8.0"
   }
 }

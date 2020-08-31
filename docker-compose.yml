@@ -1,0 +1,74 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: trigger_mysql
+    networks:
+      default:
+        ipv4_address: 192.168.4.3
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: project
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+    ports:
+      - "9906:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: trigger_phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    networks:
+      default:
+        ipv4_address: 192.168.4.4
+    ports:
+      - 8183:80
+
+  web:
+    build: ./.docker
+    container_name: trigger_web
+    networks:
+      default:
+        ipv4_address: 192.168.4.2
+    volumes:
+      - ./:/var/www/html/
+      - ./.docker/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "80:8080"
+    depends_on:
+      - "mysql"
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: trigger_mailhog
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    networks:
+      default:
+        ipv4_address: 192.168.4.5
+
+  develop_init:
+    build: ./.docker
+    container_name: trigger_develop_init
+    volumes:
+      - ./:/var/www/html/
+      - ./.docker/develop_init.sh:/usr/local/bin/develop_init
+    depends_on:
+      - "mysql"
+      - "web"
+    command: "develop_init"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.4.0/24

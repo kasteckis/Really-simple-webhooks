@@ -1,3 +1,5 @@
+import '../css/app.css';
+
 (function($) {
 
 	"use strict";
