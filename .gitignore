@@ -15,8 +15,8 @@
 ###< symfony/phpunit-bridge ###
 
 node_modules
-css/app.css
-css/app.css.map
+assets/css/app.css
+assets/css/app.css.map
 .idea
 .sass-cache
 ###> symfony/webpack-encore-bundle ###
