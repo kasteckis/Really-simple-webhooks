@@ -92,4 +92,41 @@ class JobsController extends AbstractController
 
         return $this->redirectToRoute('jobs');
     }
+
+    /**
+     * @Route("/jobs/trigger/{endpoint}", name="jobs_trigger")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @param Request $request
+     * @param string $endpoint
+     * @return Response
+     */
+    public function trigger(Request $request, string $endpoint)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $job = $entityManager->getRepository(Job::class)->findOneBy([
+            'endpoint' => $endpoint
+        ]);
+
+        if ($job instanceof Job) {
+            if (!$job->getEnabled()) {
+                return $this->json([
+                    'response' => 'Job is not enabled'
+                ]);
+            }
+
+            shell_exec($job->getPathToExecutable());
+
+            $job->setTriggeredDateTime(new \DateTime());
+
+            $entityManager->flush();
+
+            return $this->json([
+                'response' => 'Job has been completed'
+            ]);
+        }
+
+        return $this->json([
+            'response' => 'Job not found'
+        ]);
+    }
 }

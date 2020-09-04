@@ -16,6 +16,7 @@
                 <th scope="col">Path to executable</th>
                 <th scope="col">Enabled</th>
                 <th scope="col">Last time triggered</th>
+                <th scope="col">Created by</th>
                 <th scope="col">Edit</th>
             </tr>
             </thead>
@@ -23,7 +24,7 @@
             {% for job in jobs %}
                 <tr>
                     <td>{{ job.title }}</td>
-                    <td>{{ job.endpoint }}</td>
+                    <td><a href="{{ path('jobs_trigger', {endpoint: job.endpoint}) }}" target="_blank">{{ job.endpoint }}</a></td>
                     <td>{{ job.pathToExecutable }}</td>
                     <td class="text-center">
                         {% if job.enabled %}
@@ -37,6 +38,7 @@
                     {% else %}
                         <td>Never</td>
                     {% endif %}
+                    <td>{{ job.createdBy.username }}</td>
                     <td><a href="{{ path('jobs_edit', {job: job.id}) }}">Edit</a> <a href="{{ path('jobs_delete', {job: job.id}) }}" onclick="return confirm('Are you sure?')">Delete</a></td>
                 </tr>
             {% endfor %}
