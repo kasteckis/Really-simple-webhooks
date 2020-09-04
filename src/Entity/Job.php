@@ -120,7 +120,7 @@ class Job
     }
 
     /**
-     * @param User|UserInterface $createdBy
+     * @param User|UserInterface|null $createdBy
      * @return $this
      */
     public function setCreatedBy($createdBy): self
