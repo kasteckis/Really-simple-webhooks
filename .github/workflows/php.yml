@@ -10,6 +10,6 @@ jobs:
       - name: Docker compose up
         run: docker-compose up -d --build
       - name: Build project and update DB scheme
-        run: ./.docker/develop_init.sh
+        run: docker exec trigger_web ./.docker/develop_init.sh
       - name: Run PHPSTAN
         run: docker exec trigger_web ./vendor/bin/phpstan analyse src --level 5

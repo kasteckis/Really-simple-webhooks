@@ -1,11 +1,11 @@
 #!/bin/sh
 sleep 10
 cd /var/www/html
-rm -rf ./vendor
-rm -rf ./var
-rm -rf ./node_modules
-rm -rf ./sass-cache
-rm -rf ./assets/css
+#rm -rf ./vendor
+#rm -rf ./var
+#rm -rf ./node_modules
+#rm -rf ./sass-cache
+#rm -rf ./assets/css
 composer install
 npm install
 npm run scss
