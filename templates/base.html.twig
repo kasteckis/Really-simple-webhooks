@@ -11,108 +11,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {{ encore_entry_link_tags('app') }}
 
-    {#    <link rel="stylesheet" href="css/style.css">#}
 </head>
 <body>
 <div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar">
-        <div class="custom-menu">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
-        </div>
-        <div class="p-4">
-            <h1><a href="index.html" class="logo">Webhook trigger <span>Automate your executables via webhooks!</span></a></h1>
-            <ul class="list-unstyled components mb-5">
-                <li class="active">
-                    <a href="#"><span class="fa fa-home mr-3"></span>Home</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-briefcase mr-3"></span>Jobs</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-user mr-3"></span>Users</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-sign-in mr-3"></span> Login</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-sign-out mr-3"></span> Logout</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
+    {% include 'navbar.html.twig' %}
 
     <div id="content" class="p-4 p-md-5 pt-5">
-        <!-- <div class="w-25 mx-auto">
-            <form class="form-signin">
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
-                <div class="checkbox mb-1">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-        </div> -->
-
-        <!-- <h1>Create your trigger endpoints here</h1>
-
-        <input type="submit" class="btn btn-primary float-right mb-3" value="Create new job">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Endpoint</th>
-                    <th scope="col">Path to executable</th>
-                    <th scope="col">Enabled</th>
-                    <th scope="col">Last time triggered</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Quizzer</td>
-                    <td>/trigger/quizzer</td>
-                    <td>/shared/deploy/quizzer.sh</td>
-                    <td class="text-center">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    </td>
-                    <td>Yesterday <i class="fa fa-exclamation-triangle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Build failed"></i></td>
-                </tr>
-            </tbody>
-        </table> -->
-
-        <h1>Manage your users here</h1>
-
-        <input type="submit" class="btn btn-primary float-right mb-3" value="Create new user">
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th scope="col">User</th>
-                <th scope="col">Email</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Last login</th>
-                <th scope="col">Active</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Tortonas</td>
-                <td>tortonas@tortonas.dev</td>
-                <td>2020-08-30</td>
-                <td>Yesterday</td>
-                <td class="text-center">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        {% block body %}{% endblock %}
     </div>
 </div>
 
@@ -121,7 +26,6 @@
 {{ encore_entry_script_tags('bootstrap') }}
 {{ encore_entry_script_tags('app') }}
 
-{% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

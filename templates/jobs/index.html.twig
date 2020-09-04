@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello JobsController!{% endblock %}
+
+{% block body %}
+    <h1>Create your trigger endpoints here</h1>
+
+    <input type="submit" class="btn btn-primary float-right mb-3" value="Create new job">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Endpoint</th>
+            <th scope="col">Path to executable</th>
+            <th scope="col">Enabled</th>
+            <th scope="col">Last time triggered</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Quizzer</td>
+            <td>/trigger/quizzer</td>
+            <td>/shared/deploy/quizzer.sh</td>
+            <td class="text-center">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </td>
+            <td>Yesterday <i class="fa fa-exclamation-triangle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Build failed"></i></td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

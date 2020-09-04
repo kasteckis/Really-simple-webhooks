@@ -1,0 +1,32 @@
+<nav id="sidebar">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <h1><a href="index.html" class="logo">Webhook trigger <span>Automate your executables via webhooks!</span></a></h1>
+        <ul class="list-unstyled components mb-5">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li {% if app.request.get('_route') == 'home' %} class="active" {% endif %}>
+                    <a href="{{ path('home') }}"><span class="fa fa-home mr-3"></span>Home</a>
+                </li>
+                <li {% if app.request.get('_route') == 'jobs' %} class="active" {% endif %}>
+                    <a href="{{ path('jobs') }}"><span class="fa fa-briefcase mr-3"></span>Jobs</a>
+                </li>
+                <li {% if app.request.get('_route') == 'users' %} class="active" {% endif %}>
+                    <a href="{{ path('users') }}"><span class="fa fa-user mr-3"></span>Users</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_logout') }}"><span class="fa fa-sign-out mr-3"></span> Logout</a>
+                </li>
+            {% else %}
+                <li {% if app.request.get('_route') == 'users' %} class="active" {% endif %}>
+                    <a href="{{ path('app_login') }}"><span class="fa fa-sign-in mr-3"></span> Login</a>
+                </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>

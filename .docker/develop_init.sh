@@ -4,7 +4,7 @@ cd /var/www/html
 composer install
 npm install
 npm run scss
-#php bin/console d:s:u --force
+php bin/console d:s:u --force
 #php bin/console doctrine:fixtures:load --append
 echo "Project has been started"
 echo "Access project website - http://192.168.4.2/"
