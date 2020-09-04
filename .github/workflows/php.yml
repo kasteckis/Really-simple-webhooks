@@ -10,8 +10,8 @@ jobs:
       - name: Docker compose up
         run: docker-compose up -d --build
       - name: Install dependencies via composer
-        run: docker exec quizzer_web composer install
+        run: docker exec trigger_web composer install
       - name: Update database scheme
-        run: docker exec quizzer_web bin/console d:s:u --force
+        run: docker exec trigger_web bin/console d:s:u --force
       - name: Run PHPSTAN
-        run: docker exec quizzer_web ./vendor/bin/phpstan analyse src --level 5
+        run: docker exec trigger_web ./vendor/bin/phpstan analyse src --level 5
