@@ -37,7 +37,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Job::class, mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity=Job::class, mappedBy="createdBy", orphanRemoval=true)
      */
     private $jobs;
 

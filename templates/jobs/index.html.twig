@@ -34,9 +34,9 @@
                         {% endif %}
                     </td>
                     {% if job.triggeredDateTime is not null %}
-                        <td>{{ job.triggeredDateTime|date("Y-m-d H:i:s") }}</td>
+                        <td><a href="{{ path('jobs_builds', {job: job.id}) }}">{{ job.triggeredDateTime|date("Y-m-d H:i:s") }}</a></td>
                     {% else %}
-                        <td>Never</td>
+                        <td><a href="{{ path('jobs_builds', {job: job.id}) }}">Never</a></td>
                     {% endif %}
                     <td>{{ job.createdBy.username }}</td>
                     <td><a href="{{ path('jobs_edit', {job: job.id}) }}">Edit</a> <a href="{{ path('jobs_delete', {job: job.id}) }}" onclick="return confirm('Are you sure?')">Delete</a></td>

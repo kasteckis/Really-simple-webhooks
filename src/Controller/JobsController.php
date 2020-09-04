@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Build;
 use App\Entity\Job;
 use App\Entity\User;
 use App\Form\JobType;
@@ -118,6 +119,11 @@ class JobsController extends AbstractController
 
             $job->setTriggeredDateTime(new \DateTime());
 
+            $build = new Build();
+            $build->setDateTime(new \DateTime());
+            $build->setJob($job);
+
+            $entityManager->persist($build);
             $entityManager->flush();
 
             return $this->json([
@@ -127,6 +133,27 @@ class JobsController extends AbstractController
 
         return $this->json([
             'response' => 'Job not found'
+        ]);
+    }
+
+    /**
+     * @Route("/jobs/builds/{job}", name="jobs_builds")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @param Request $request
+     * @param Job $job
+     * @return Response
+     */
+    public function builds(Request $request, Job $job)
+    {
+        $builds = $this->getDoctrine()->getRepository(Build::class)->findBy([
+            'job' => $job
+        ], [
+           'id' => 'DESC'
+        ], 100);
+
+        return $this->render('jobs/builds.html.twig', [
+            'builds' => $builds,
+            'job' => $job
         ]);
     }
 }

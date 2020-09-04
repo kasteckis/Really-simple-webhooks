@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello JobsController!{% endblock %}
+
+{% block body %}
+    <h1>Builds of the {{ job.title }} job</h1>
+    <form action="{{ path('jobs') }}">
+        <input type="submit" class="btn btn-primary float-left mb-3" value="Back">
+    </form>
+    {% if builds|length > 0 %}
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Build number</th>
+                <th scope="col">When</th>
+                <th scope="col">Job title</th>
+                <th scope="col">Job owner</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for build in builds %}
+                <tr>
+                    <td>{{ build.id }}</td>
+                    <td>{{ build.dateTime|date("Y-m-d H:i:s") }}</td>
+                    <td>{{ build.job.title }}</td>
+                    <td>{{ build.job.createdBy.username }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="text-center" style="color: red">This job was never executed!</h3>
+    {% endif %}
+{% endblock %}

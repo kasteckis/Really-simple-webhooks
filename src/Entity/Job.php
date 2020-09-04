@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\JobRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -48,6 +50,16 @@ class Job
      * @ORM\JoinColumn(nullable=false)
      */
     private $createdBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Build::class, mappedBy="job", orphanRemoval=true)
+     */
+    private $builds;
+
+    public function __construct()
+    {
+        $this->builds = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -126,6 +138,37 @@ class Job
     public function setCreatedBy($createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Build[]
+     */
+    public function getBuilds(): Collection
+    {
+        return $this->builds;
+    }
+
+    public function addBuild(Build $build): self
+    {
+        if (!$this->builds->contains($build)) {
+            $this->builds[] = $build;
+            $build->setJob($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBuild(Build $build): self
+    {
+        if ($this->builds->contains($build)) {
+            $this->builds->removeElement($build);
+            // set the owning side to null (unless already changed)
+            if ($build->getJob() === $this) {
+                $build->setJob(null);
+            }
+        }
 
         return $this;
     }
