@@ -9,9 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Docker compose up
         run: docker-compose up -d --build
-      - name: Install dependencies via composer
-        run: docker exec trigger_web composer install
-      - name: Update database scheme
-        run: docker exec trigger_web bin/console d:s:u --force
+      - name: Build project and update DB scheme
+        run: ./.docker/develop_init.sh
       - name: Run PHPSTAN
         run: docker exec trigger_web ./vendor/bin/phpstan analyse src --level 5

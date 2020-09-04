@@ -4,6 +4,7 @@ cd /var/www/html
 composer install
 npm install
 npm run scss
+npm run build
 php bin/console d:s:u --force
 #php bin/console doctrine:fixtures:load --append
 echo "Project has been started"
