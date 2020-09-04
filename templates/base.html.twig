@@ -17,6 +17,21 @@
     {% include 'navbar.html.twig' %}
 
     <div id="content" class="p-4 p-md-5 pt-5">
+        {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+            {% for message in messages %}
+                <div class="toast" style="position: absolute; top: 2%; right: 2%;" data-delay="5000">
+                    <div class="toast-header bg-{{ label }}">
+                        <strong class="mr-auto">ALERT</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </div>
 </div>

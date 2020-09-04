@@ -12,6 +12,9 @@
                 <li {% if app.request.get('_route') == 'home' %} class="active" {% endif %}>
                     <a href="{{ path('home') }}"><span class="fa fa-home mr-3"></span>Home</a>
                 </li>
+                <li {% if app.request.get('_route') == 'profile' %} class="active" {% endif %}>
+                    <a href="{{ path('profile') }}"><span class="fa fa-id-card mr-3"></span>Profile</a>
+                </li>
                 <li {% if app.request.get('_route') == 'jobs' %} class="active" {% endif %}>
                     <a href="{{ path('jobs') }}"><span class="fa fa-briefcase mr-3"></span>Jobs</a>
                 </li>
