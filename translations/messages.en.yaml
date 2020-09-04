@@ -1,0 +1,8 @@
+jobs:
+  index:
+    title: Title
+    endpoint: Endpoint
+    path_to_exe: Path to executable
+    last_time_triggered: Last time triggered
+    enabled: Enabled
+    you_have_no_jobs: You have no jobs! Consider creating one
