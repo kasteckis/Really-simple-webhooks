@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Build;
+use App\Entity\Job;
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,8 +19,19 @@ class HomeController extends AbstractController
     {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
+
+        $jobs = $this->getDoctrine()->getRepository(Job::class)->findBy([], [
+            'triggeredDateTime' => 'DESC'
+        ], 5);
+
+        $builds = $this->getDoctrine()->getRepository(Build::class)->findBy([],[
+            'dateTime' => 'DESC'
+        ], 5);
+
         return $this->render('home/index.html.twig', [
-            'user' => $currentUser
+            'user' => $currentUser,
+            'jobs' => $jobs,
+            'builds' => $builds
         ]);
     }
 }

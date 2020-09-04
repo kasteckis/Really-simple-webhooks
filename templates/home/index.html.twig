@@ -2,4 +2,36 @@
 
 {% block body %}
 <h1>Hey, {{ user.username }}</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card bg-transparent">
+                <div class="card-body">
+                    <h5 class="card-title">Last 5 builds</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for job in jobs %}
+                    <li class="list-group-item bg-transparent text-dark">
+                        {{ job.title }} ({{ job.triggeredDateTime|date("Y-m-d H:i:s") }})
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="col-sm">
+                <div class="card bg-transparent">
+                    <div class="card-body">
+                        <h5 class="card-title">Last 5 builds</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for build in builds %}
+                            <li class="list-group-item bg-transparent text-dark">
+                                {{ build.job.title }} ({{ build.dateTime|date("Y-m-d H:i:s") }})
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
