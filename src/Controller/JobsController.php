@@ -48,6 +48,7 @@ class JobsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->jobsManager->saveJob($form, $this->getUser());
+            $this->addFlash('success', 'Job was added!');
             return $this->redirectToRoute('jobs');
         }
 
@@ -70,7 +71,7 @@ class JobsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->jobsManager->saveJob($form, $this->getUser());
-
+            $this->addFlash('success', 'Job was modified!');
             return $this->redirectToRoute('jobs');
         }
 
@@ -90,6 +91,7 @@ class JobsController extends AbstractController
     {
         $this->getDoctrine()->getManager()->remove($job);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', 'Job was deleted!');
 
         return $this->redirectToRoute('jobs');
     }

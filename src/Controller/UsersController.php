@@ -46,6 +46,7 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->usersManager->saveUser($form, $this->getUser());
+            $this->addFlash('success', 'User was added!');
             return $this->redirectToRoute('users');
         }
 
@@ -69,6 +70,7 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->usersManager->saveUser($form, $this->getUser());
+            $this->addFlash('success', 'User was modified!');
 
             return $this->redirectToRoute('users');
         }
@@ -90,6 +92,7 @@ class UsersController extends AbstractController
     {
         $this->getDoctrine()->getManager()->remove($user);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', 'User was deleted!');
 
         return $this->redirectToRoute('users');
     }
