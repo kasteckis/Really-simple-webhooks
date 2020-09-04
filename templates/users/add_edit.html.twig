@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello JobsController!{% endblock %}
+
+{% block body %}
+    {% if edit %}
+        <h1>Editing an user</h1>
+    {% else %}
+        <h1>Creating an user</h1>
+    {% endif %}
+    <form action="{{ path('users') }}">
+        <input type="submit" class="btn btn-primary float-left mb-3" value="Back">
+    </form><br><br><br>
+
+    {{ form(form) }}
+{% endblock %}

@@ -5,27 +5,47 @@
 {% block body %}
     <h1>Manage your users here</h1>
 
-    <input type="submit" class="btn btn-primary float-right mb-3" value="Create new user">
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th scope="col">User</th>
-            <th scope="col">Email</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Last login</th>
-            <th scope="col">Active</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Tortonas</td>
-            <td>tortonas@tortonas.dev</td>
-            <td>2020-08-30</td>
-            <td>Yesterday</td>
-            <td class="text-center">
-                <i class="fa fa-check" aria-hidden="true"></i>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <form action="{{ path('users_add') }}">
+        <input type="submit" class="btn btn-primary float-right mb-3" value="Create an user">
+    </form>
+    {% if users|length > 0 %}
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Last login</th>
+                <th scope="col">Active</th>
+                <th scope="col">Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdAt|date("Y-m-d H:i:s") }}</td>
+                    <td>
+                        {% if user.lastLogin is null %}
+                            Never
+                        {% else %}
+                            {{ user.lastLogin|date("Y-m-d H:i:s") }}
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if user.active %}
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        {% else %}
+                            <i class="fa fa-ban" aria-hidden="true"></i>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('users_edit', {user: user.id}) }}">Edit</a> <a href="{{ path('users_delete', {user: user.id}) }}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="text-center" style="color: red">You have no users! How did you get there?</h3>
+    {% endif %}
 {% endblock %}

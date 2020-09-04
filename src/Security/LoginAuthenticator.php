@@ -67,7 +67,10 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy([
+            'email' => $credentials['email'],
+            'active' => true
+        ]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -92,6 +95,10 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
+        /** @var User $user */
+        $user = $token->getUser();
+        $user->setLastLogin(new \DateTime());
+        $this->entityManager->flush();
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
