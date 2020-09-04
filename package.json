@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "sass assets/scss/app.scss assets/css/app.css",
+    "scss": "/usr/local/bin/sass assets/scss/app.scss assets/css/app.css",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
