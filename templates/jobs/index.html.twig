@@ -3,18 +3,20 @@
 {% block title %}Hello JobsController!{% endblock %}
 
 {% block body %}
-    <h1>Create your trigger endpoints here</h1>
-
-    <input type="submit" class="btn btn-primary float-right mb-3" value="Create new job">
+    <h1>Create your trigger jobs here!</h1>
+    <form action="{{ path('jobs_add') }}">
+        <input type="submit" class="btn btn-primary float-right mb-3" value="Create a job">
+    </form>
     {% if jobs|length > 0 %}
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th scope="col">{{ 'jobs.index.title'|trans }}</th>
-                <th scope="col">{{ 'jobs.index.endpoint'|trans }}</th>
-                <th scope="col">{{ 'jobs.index.path_to_exe'|trans }}</th>
-                <th scope="col">{{ 'jobs.index.enabled'|trans }}</th>
-                <th scope="col">{{ 'jobs.index.last_time_triggered'|trans }}</th>
+                <th scope="col">Title</th>
+                <th scope="col">Endpoint</th>
+                <th scope="col">Path to executable</th>
+                <th scope="col">Enabled</th>
+                <th scope="col">Last time triggered</th>
+                <th scope="col">Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -24,18 +26,19 @@
                     <td>{{ job.endpoint }}</td>
                     <td>{{ job.pathToExecutable }}</td>
                     <td class="text-center">
-                        {% if job.endpoint %}
+                        {% if job.enabled %}
                             <i class="fa fa-check" aria-hidden="true"></i>
                         {% else %}
                             <i class="fa fa-ban" aria-hidden="true"></i>
                         {% endif %}
                     </td>
                     <td>{{ job.triggeredDateTime|date("Y-m-d H:i:s") }}</td>
+                    <td><a href="{{ path('jobs_edit', {job: job.id}) }}">Edit</a> <a href="{{ path('jobs_delete', {job: job.id}) }}" onclick="return confirm('Are you sure?')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <h3 class="text-center" style="color: red">{{ 'jobs.index.you_have_no_jobs'|trans }}</h3>
+        <h3 class="text-center" style="color: red">You have no jobs! Consider creating one!</h3>
     {% endif %}
 {% endblock %}

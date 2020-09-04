@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\JobRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=JobRepository::class)
@@ -118,7 +119,11 @@ class Job
         return $this->createdBy;
     }
 
-    public function setCreatedBy(?User $createdBy): self
+    /**
+     * @param User|UserInterface $createdBy
+     * @return $this
+     */
+    public function setCreatedBy($createdBy): self
     {
         $this->createdBy = $createdBy;
 

@@ -23,7 +23,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="json")
@@ -112,6 +112,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
+        return null;
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
@@ -153,5 +154,10 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->email;
     }
 }
