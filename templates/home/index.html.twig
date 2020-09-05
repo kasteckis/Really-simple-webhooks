@@ -11,7 +11,7 @@
                 <ul class="list-group list-group-flush">
                     {% for job in jobs %}
                     <li class="list-group-item bg-transparent text-dark">
-                        {{ job.title }} ({{ job.triggeredDateTime|date("Y-m-d H:i:s") }})
+                        <a href="{{ path('jobs') }}">{{ job.title }}</a> ({{ job.triggeredDateTime|date("Y-m-d H:i:s") }})
                     </li>
                     {% endfor %}
                 </ul>
@@ -26,7 +26,7 @@
                     <ul class="list-group list-group-flush">
                         {% for build in builds %}
                             <li class="list-group-item bg-transparent text-dark">
-                                {{ build.job.title }} ({{ build.dateTime|date("Y-m-d H:i:s") }})
+                                <a href="{{ path('jobs_builds', {job: build.job.id}) }}">{{ build.job.title }}</a> ({{ build.dateTime|date("Y-m-d H:i:s") }})
                             </li>
                         {% endfor %}
                     </ul>
