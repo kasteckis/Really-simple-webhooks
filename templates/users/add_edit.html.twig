@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello JobsController!{% endblock %}
+{% block title %}
+    {% if edit %}
+        Edit user
+    {% else %}
+        Create user
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     {% if edit %}
