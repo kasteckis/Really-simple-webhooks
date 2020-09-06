@@ -98,7 +98,6 @@ class JobsController extends AbstractController
 
     /**
      * @Route("/jobs/trigger/{endpoint}", name="jobs_trigger")
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @param Request $request
      * @param string $endpoint
      * @return Response
