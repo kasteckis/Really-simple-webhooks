@@ -2,6 +2,8 @@
 <b>What is it?</b>  
 -- Really simple webhooks builder. Once your webhook is triggered it will run some kind command (or shell script) on your server
 
+![Really-simple-webhooks-readme-image](readme.gif)
+
 # Quick startup
 `$ git clone https://github.com/kasteckis/Really-simple-webhooks.git`  
 `$ cd ./Really-simple-webhooks`  
