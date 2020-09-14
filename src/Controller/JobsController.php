@@ -104,6 +104,7 @@ class JobsController extends AbstractController
      */
     public function trigger(Request $request, string $endpoint)
     {
+        set_time_limit(600);
         $entityManager = $this->getDoctrine()->getManager();
         $job = $entityManager->getRepository(Job::class)->findOneBy([
             'endpoint' => $endpoint
