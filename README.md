@@ -26,7 +26,3 @@ Or run:
 `$ ./tools/build.sh`  
 * Visit your website. Dont forget to create your first user by writing the following:  
 `$ bin/console app:create-user admin@admin.dev password`
-
-# Problems?
-
-Is there any issues? [Submit them here](https://github.com/kasteckis/Really-simple-webhooks/issues)
